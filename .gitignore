@@ -1,53 +1,59 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# =========================
+# macOS
+# =========================
+.DS_Store
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-.run/
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-
-### Application uploads
-uploads/
-
-### Environment / Secrets ###
+# =========================
+# Environment / Secrets
+# =========================
 .env
 .env.*
 !.env.example
 
-### OS ###
-.DS_Store
+# =========================
+# Java / Maven
+# =========================
+target/
+**/target/
 
-### Logs ###
+# =========================
+# IntelliJ IDEA
+# =========================
+.idea/
+*.iml
+*.iws
+*.ipr
+.run/
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# Spring / STS
+# =========================
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+# =========================
+# Application uploads
+# =========================
+**/uploads/
+
+# =========================
+# Logs
+# =========================
 *.log
 logs/
 
-### Temporary files ###
+# =========================
+# Temporary files
+# =========================
 *.tmp
 *.temp
