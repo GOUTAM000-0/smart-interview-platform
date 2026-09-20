@@ -1,0 +1,1641 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+/* ==========================================
+   TOKENS  (monochrome)
+========================================== */
+
+:root{
+
+    --bg-deep:#000000;
+    --bg-panel-1:#0c0c0c;
+    --bg-panel-2:#1c1c1c;
+
+    /* frosted white card over the dark hero */
+    --glass-bg:rgba(255,255,255,.92);
+    --glass-border:rgba(255,255,255,.55);
+
+    --white:#ffffff;
+
+    --ink:#111111;
+    --ink-muted:#5c5c5c;
+    --ink-faint:#8f8f8f;
+
+    --hero-text:#ffffff;
+    --hero-muted:rgba(255,255,255,.66);
+    --hero-faint:rgba(255,255,255,.40);
+
+    --font-display:'Sora','Segoe UI',sans-serif;
+    --font-body:'Inter','Segoe UI',sans-serif;
+
+    --border:rgba(255,255,255,.12);
+    --border-soft:rgba(255,255,255,.08);
+
+}
+
+/* ==========================================
+   GLOBAL
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+
+    min-height:100%;
+
+}
+
+body{
+
+    font-family:var(--font-body);
+    background:var(--bg-deep);
+
+    /* was overflow:hidden — that clipped taller pages
+       (interviewer registration, forgot-password, etc.)
+       so their bottom content / login link was unreachable */
+    overflow-x:hidden;
+    overflow-y:auto;
+
+}
+
+/* ==========================================
+   HERO PANEL (left, decorative — fixed so it
+   never scrolls away on tall forms)
+========================================== */
+
+.hero-panel{
+
+    position:fixed;
+    inset:0;
+    z-index:0;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 8vw;
+
+    background:
+    radial-gradient(circle at 18% 22%,var(--bg-panel-2) 0%,transparent 45%),
+    radial-gradient(circle at 85% 85%,rgba(255,255,255,.06) 0%,transparent 40%),
+    linear-gradient(160deg,var(--bg-deep) 0%,var(--bg-panel-1) 55%,var(--bg-deep) 100%);
+
+    overflow:hidden;
+
+}
+
+.hero-content{
+
+    position:relative;
+    z-index:2;
+
+    max-width:520px;
+
+}
+
+.hero-eyebrow{
+
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:3px;
+    text-transform:uppercase;
+
+    color:var(--hero-muted);
+
+    margin-bottom:22px;
+
+}
+
+.hero-eyebrow::before{
+
+    content:'';
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--white);
+    box-shadow:0 0 10px rgba(255,255,255,.7);
+
+}
+
+.hero-title{
+
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(32px,3.6vw,46px);
+    line-height:1.18;
+    color:var(--hero-text);
+
+    margin-bottom:20px;
+
+}
+
+.hero-title .accent{
+
+    color:var(--white);
+    border-bottom:2px solid rgba(255,255,255,.4);
+
+}
+
+.hero-subtitle{
+
+    font-size:16px;
+    line-height:1.7;
+    color:var(--hero-muted);
+
+    max-width:420px;
+
+}
+
+.hero-features{
+
+    list-style:none;
+
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+
+    margin-top:38px;
+
+}
+
+.hero-features li{
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    font-size:14.5px;
+    color:var(--hero-muted);
+
+}
+
+.hero-features .feature-icon{
+
+    flex:0 0 auto;
+
+    width:36px;
+    height:36px;
+
+    border-radius:10px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.18);
+
+    color:var(--white);
+
+}
+
+.hero-graphic{
+
+    position:absolute;
+    right:-6%;
+    bottom:-8%;
+    z-index:1;
+
+    width:min(48vw,620px);
+    opacity:.7;
+
+    pointer-events:none;
+
+}
+
+/* ==========================================
+   MAIN CONTAINER (right, form side)
+========================================== */
+
+.auth-container{
+
+    position:relative;
+    z-index:1;
+
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+
+    padding:60px 9vw;
+
+}
+
+/* ==========================================
+   LOGIN PANEL (frosted white glass card)
+========================================== */
+
+.blue-shape{
+
+    width:410px;
+    max-width:410px;
+
+    padding:42px 38px;
+
+    border-radius:22px;
+
+    background:var(--glass-bg);
+
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    border:1px solid var(--glass-border);
+
+    box-shadow:
+    0 30px 60px rgba(0,0,0,.55);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+/* ==========================================
+   FORM
+========================================== */
+
+.login-box{
+
+    width:100%;
+    color:var(--ink);
+
+}
+
+/* ==========================================
+   USER ICON
+========================================== */
+
+.user-icon{
+
+    width:64px;
+    height:64px;
+
+    border-radius:50%;
+
+    margin:0 auto 22px;
+
+    background:var(--ink);
+
+    border:1px solid rgba(0,0,0,.08);
+    box-shadow:0 10px 24px rgba(0,0,0,.18);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#fff;
+
+}
+
+/* ==========================================
+   TITLE
+========================================== */
+
+.login-box h2{
+
+    text-align:center;
+
+    font-family:var(--font-display);
+    font-size:24px;
+    font-weight:600;
+
+    letter-spacing:3px;
+
+    color:var(--ink);
+
+    margin-bottom:6px;
+
+}
+
+.login-box .form-subtitle{
+
+    text-align:center;
+    font-size:13.5px;
+    color:var(--ink-muted);
+    margin-bottom:26px;
+
+}
+
+/* ==========================================
+   ROLE TOGGLE
+========================================== */
+
+.role-toggle-label{
+
+    display:block;
+
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+
+    margin-bottom:10px;
+
+}
+
+.role-toggle{
+
+    display:flex;
+    gap:6px;
+
+    background:rgba(0,0,0,.05);
+    border:1px solid rgba(0,0,0,.08);
+    border-radius:12px;
+
+    padding:4px;
+
+    margin-bottom:24px;
+
+}
+
+.role-toggle .form-check{
+
+    flex:1;
+    position:relative;
+
+    margin:0;
+    padding:0;
+
+    display:flex;
+
+}
+
+.role-toggle .form-check-input{
+
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    margin:0;
+    opacity:0;
+
+    cursor:pointer;
+
+}
+
+.role-toggle .form-check-label{
+
+    width:100%;
+
+    text-align:center;
+
+    padding:9px 10px;
+
+    border-radius:9px;
+
+    font-size:13.5px;
+    font-weight:500;
+
+    color:var(--ink-muted);
+
+    cursor:pointer;
+
+    transition:background .25s ease,color .25s ease;
+
+}
+
+.role-toggle .form-check-input:checked + .form-check-label{
+
+    background:var(--ink);
+    color:#fff;
+
+}
+
+.role-toggle .form-check-input:focus-visible + .form-check-label{
+
+    outline:2px solid var(--ink);
+    outline-offset:2px;
+
+}
+
+/* ==========================================
+   INPUT BOX
+========================================== */
+
+.input-box{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    border-bottom:2px solid rgba(0,0,0,.14);
+
+    padding:4px 2px;
+
+    margin-bottom:18px;
+
+    transition:border-color .25s ease;
+
+}
+
+.input-box:focus-within{
+
+    border-bottom-color:var(--ink);
+
+}
+
+.input-box .input-icon{
+
+    display:flex;
+    color:var(--ink-faint);
+
+    transition:color .25s ease;
+
+}
+
+.input-box:focus-within .input-icon{
+
+    color:var(--ink);
+
+}
+
+.input-box input{
+
+    width:100%;
+
+    padding:10px 0;
+
+    background:none;
+
+    border:none;
+
+    outline:none;
+
+    color:var(--ink);
+
+    font-size:15px;
+    font-family:var(--font-body);
+
+}
+
+.input-box input::placeholder{
+
+    color:var(--ink-faint);
+
+}
+
+/* ==========================================
+   OPTIONS ROW
+========================================== */
+
+.options-row{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    font-size:13px;
+
+    margin-bottom:6px;
+
+}
+
+.options-row .form-check{
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    margin:0;
+    padding:0;
+
+}
+
+.options-row .form-check-input{
+
+    width:16px;
+    height:16px;
+
+    margin:0;
+
+    accent-color:var(--ink);
+
+    cursor:pointer;
+
+}
+
+.options-row .form-check-label{
+
+    color:var(--ink-muted);
+    cursor:pointer;
+
+}
+
+.options-row .btn-link{
+
+    color:var(--ink) !important;
+    font-size:13px;
+    font-weight:500;
+
+}
+
+.options-row .btn-link:hover{
+
+    color:var(--ink-muted) !important;
+
+}
+
+/* ==========================================
+   BUTTON (global default — used by the login
+   form). Interview-room buttons override this
+   further down with .control-btn / .panel-btn /
+   .leave-btn so they don't inherit width:100%.
+========================================== */
+
+button{
+
+    width:100%;
+
+    padding:13px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--ink);
+
+    color:#fff;
+
+    font-family:var(--font-body);
+    font-size:14.5px;
+    font-weight:600;
+    letter-spacing:1.5px;
+
+    cursor:pointer;
+
+    box-shadow:0 14px 26px rgba(0,0,0,.18);
+
+    transition:transform .25s ease,box-shadow .25s ease,filter .25s ease;
+
+}
+
+button.btn-primary{
+
+    margin-top:8px;
+
+}
+
+button:hover{
+
+    transform:translateY(-2px);
+    filter:brightness(1.25);
+
+}
+
+button:disabled{
+
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+
+}
+
+button.btn-link{
+
+    width:auto;
+
+    background:none;
+    box-shadow:none;
+
+    padding:0;
+
+    color:var(--ink);
+    font-weight:600;
+    letter-spacing:normal;
+
+    text-decoration:none;
+
+}
+
+button.btn-link:hover{
+
+    background:none;
+    transform:none;
+    filter:none;
+
+    text-decoration:underline;
+
+}
+
+/* ==========================================
+   FOOTER LINK
+========================================== */
+
+.login-box p,
+.login-box .text-center{
+
+    margin-top:20px;
+
+    text-align:center;
+
+    color:var(--ink-muted);
+
+    font-size:14px;
+
+}
+
+.login-box p a,
+.login-box .text-center .btn-link{
+
+    color:var(--ink);
+
+    margin-left:4px;
+    font-weight:600;
+
+}
+
+/* ==========================================
+   ALERT / TOAST  (professional, compact —
+   overrides react-bootstrap's default Alert)
+========================================== */
+
+.auth-alert{
+
+    position:relative;
+
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+
+    padding:12px 40px 12px 14px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(0,0,0,.08);
+    border-left:3px solid var(--ink);
+
+    background:#f7f7f7;
+
+    color:var(--ink);
+
+    font-size:13px;
+    line-height:1.5;
+
+    box-shadow:0 6px 16px rgba(0,0,0,.06);
+
+    margin-bottom:18px;
+
+}
+
+.auth-alert::before{
+
+    content:'';
+
+    flex:0 0 auto;
+
+    width:7px;
+    height:7px;
+
+    margin-top:5px;
+
+    border-radius:50%;
+
+    background:var(--ink);
+
+}
+
+.auth-alert.alert-success{
+
+    border-left-color:#1f9d55;
+    background:#f4faf6;
+
+}
+
+.auth-alert.alert-success::before{
+
+    background:#1f9d55;
+
+}
+
+.auth-alert.alert-danger{
+
+    border-left-color:#d33636;
+    background:#fbf4f4;
+
+}
+
+.auth-alert.alert-danger::before{
+
+    background:#d33636;
+
+}
+
+.auth-alert .btn-close{
+
+    position:absolute;
+    top:10px;
+    right:10px;
+
+    padding:8px;
+
+    font-size:10px;
+
+    opacity:.5;
+
+    background-size:10px;
+
+}
+
+.auth-alert .btn-close:hover{
+
+    opacity:.9;
+
+}
+
+/* ==========================================
+   ROLE PICKER MODAL  (Register As / Forgot
+   Password) — compact, tap-to-select tiles
+========================================== */
+
+.role-modal-backdrop{
+
+    z-index:1065;
+
+    background:rgba(0,0,0,.72);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+}
+
+.role-modal-dialog{
+
+    max-width:360px;
+    width:100%;
+
+    margin:0;
+
+}
+
+.role-modal-content{
+
+    max-height:85vh;
+    overflow-y:auto;
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    background:#0c0c0c;
+    color:#fff;
+
+    box-shadow:0 30px 60px rgba(0,0,0,.5);
+
+}
+
+.role-modal-header{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:20px 22px 6px;
+
+    border-bottom:none;
+
+}
+
+.role-modal-header .modal-title{
+
+    font-family:var(--font-display);
+    font-size:16px;
+    font-weight:600;
+    letter-spacing:.5px;
+
+}
+
+.role-modal-header .btn-close{
+
+    filter:invert(1);
+    opacity:.55;
+
+}
+
+.role-modal-header .btn-close:hover{
+
+    opacity:1;
+
+}
+
+.role-modal-body{
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+
+    padding:14px 22px 24px;
+
+}
+
+.role-option{
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    width:100%;
+
+    padding:14px 16px;
+
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:14px;
+
+    box-shadow:none;
+
+    color:#fff;
+    font-size:14.5px;
+    font-weight:500;
+    letter-spacing:normal;
+    text-align:left;
+
+    cursor:pointer;
+
+    transition:background .2s ease,border-color .2s ease,transform .2s ease;
+
+}
+
+.role-option:hover{
+
+    background:rgba(255,255,255,.09);
+    border-color:rgba(255,255,255,.30);
+    transform:translateX(3px);
+
+}
+
+.role-option-icon{
+
+    flex:0 0 auto;
+
+    width:38px;
+    height:38px;
+
+    border-radius:10px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(255,255,255,.08);
+
+    color:#fff;
+
+}
+
+.role-option-label{
+
+    flex:1;
+
+}
+
+.role-option-arrow{
+
+    color:rgba(255,255,255,.35);
+    font-size:16px;
+
+}
+
+/* ==========================================
+   MOBILE (auth)
+========================================== */
+
+@media(max-width:1100px){
+
+    .hero-content{
+
+        display:none;
+
+    }
+
+    .hero-graphic{
+
+        opacity:.15;
+
+    }
+
+    .auth-container{
+
+        justify-content:center;
+
+        padding:32px 20px;
+
+    }
+
+    .blue-shape{
+
+        width:100%;
+        max-width:420px;
+
+    }
+
+}
+/* ==========================================================
+   ==========================================================
+   INTERVIEW ROOM
+   Same monochrome theme (Sora / Inter, black + white, glass).
+   Candidate's video is the large main stage; everyone else
+   (interviewer, or the candidate, depending on the page) is
+   shown as small tiles in a scrollable strip underneath.
+========================================================== */
+
+.interview-page{
+    height:100vh;          /* instead of min-height */
+    overflow:hidden;       /* IMPORTANT */
+    background:
+        radial-gradient(circle at 15% 10%, var(--bg-panel-2) 0%, transparent 45%),
+        radial-gradient(circle at 90% 90%, rgba(255,255,255,.05) 0%, transparent 40%),
+        linear-gradient(160deg,var(--bg-deep) 0%,var(--bg-panel-1) 55%,var(--bg-deep) 100%);
+    color:var(--white);
+    font-family:var(--font-body);
+    padding:24px;
+    box-sizing:border-box;
+}
+
+/* ---------- Header ---------- */
+
+.interview-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-bottom:28px;
+}
+
+.interview-title{
+    font-family:var(--font-display);
+    font-size:clamp(20px,2.4vw,28px);
+    font-weight:600;
+    letter-spacing:.3px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:0;
+}
+
+.participant-badge{
+    font-family:var(--font-body);
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    color:var(--white);
+    background:rgba(255,255,255,.08);
+    border:1px solid var(--border);
+    padding:6px 14px;
+    border-radius:999px;
+}
+
+.leave-btn{
+    width:auto;
+    padding:11px 22px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.14);
+    background:#d33636;
+    color:#fff;
+    font-family:var(--font-body);
+    font-size:13.5px;
+    font-weight:600;
+    letter-spacing:.5px;
+    cursor:pointer;
+    box-shadow:0 14px 26px rgba(211,54,54,.25);
+    transition:transform .2s ease, filter .2s ease;
+}
+
+.leave-btn:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.1);
+}
+
+/* ---------- Layout ---------- */
+
+.interview-body{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+
+    height:calc(100vh - 110px);
+
+    overflow:hidden;
+}
+
+@media (max-width:1100px){
+    .interview-body{
+        grid-template-columns:1fr;
+    }
+}
+
+.video-stack{
+    display:flex;
+    flex-direction:column;
+
+    height:100%;
+    min-height:0;
+}
+
+/* ---------- Main stage ---------- */
+
+.stage{
+    flex:1;
+
+    min-height:0;
+
+    position:relative;
+
+    width:100%;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    background:var(--bg-panel-1);
+
+    border:1px solid var(--border);
+
+    box-shadow:0 30px 60px rgba(0,0,0,.5);
+}
+
+.stage video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.stage-empty{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:rgba(255,255,255,.5);
+    font-size:14px;
+    letter-spacing:.3px;
+    text-align:center;
+    padding:0 24px;
+}
+
+.tile-label{
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 12px;
+    border-radius:999px;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.12);
+    font-size:12.5px;
+    font-weight:500;
+    color:#fff;
+}
+
+.tile-label .dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#22c55e;
+    box-shadow:0 0 6px rgba(34,197,94,.8);
+}
+
+/* ---------- Thumbnail strip ---------- */
+
+.thumb-row{
+
+    flex-shrink:0;
+
+    display:flex;
+
+    gap:12px;
+
+    overflow-x:auto;
+
+    padding-bottom:6px;
+
+}
+
+.thumb-row::-webkit-scrollbar{
+    height:6px;
+}
+
+.thumb-row::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.18);
+    border-radius:999px;
+}
+
+.thumb-tile{
+    position: relative;
+
+    flex: 0 0 auto;
+
+    width: 230px;
+
+    height: 140px;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    background: var(--bg-panel-1);
+
+    border: 1px solid var(--border-soft);
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.35);
+
+    transition: transform .2s ease;
+}
+
+.thumb-tile:hover{
+    transform: translateY(-3px);
+}
+
+.thumb-tile video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.thumb-tile .tile-label{
+    left:10px;
+    bottom:10px;
+    padding:4px 10px;
+    font-size:11px;
+}
+
+.thumb-placeholder{
+    flex:0 0 auto;
+    width:210px;
+    height:130px;
+    border-radius:14px;
+    border:1px dashed rgba(255,255,255,.18);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:rgba(255,255,255,.45);
+    font-size:12px;
+    text-align:center;
+    padding:0 14px;
+}
+
+/* ---------- Controls ---------- */
+
+.controls-bar{
+
+    flex-shrink:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+}
+
+.control-btn{
+    width:auto;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:11px 20px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.06);
+    color:#fff;
+    font-family:var(--font-body);
+    font-size:13.5px;
+    font-weight:600;
+    letter-spacing:.3px;
+    cursor:pointer;
+    box-shadow:none;
+    transition:transform .2s ease, background .2s ease, filter .2s ease;
+}
+
+.control-btn:hover{
+    transform:translateY(-2px);
+    background:rgba(255,255,255,.12);
+}
+
+.control-btn.is-on{
+    background:var(--white);
+    color:var(--ink);
+}
+
+.control-btn.is-on:hover{
+    filter:brightness(.95);
+}
+
+.control-btn.is-share{
+    background:#e8a83c;
+    color:#1a1300;
+    border-color:transparent;
+}
+
+.control-btn:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* ---------- Side panel (CV / AI questions) ----------
+   Kept intentionally compact: the resume/job-role/generate controls
+   are secondary — the question list below is the important part and
+   needs the vertical room.
+------------------------------------------------------------------- */
+.side-panel{
+    display:flex;
+    flex-direction:column;
+
+    height:100%;
+    min-height:0;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:16px 18px;
+    backdrop-filter:blur(10px);
+}
+
+.side-panel-header{
+    flex-shrink:0;
+    font-family:var(--font-display);
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.6);
+    margin-bottom:8px;
+}
+
+.side-panel-header.ai-section-header{
+    margin-top:12px;
+}
+
+.side-panel input[type="text"],
+.side-panel input[type="file"]{
+    flex-shrink:0;
+    width:100%;
+    padding:8px 10px;
+    margin-bottom:8px;
+    border-radius:9px;
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.05);
+    color:#fff;
+    font-family:var(--font-body);
+    font-size:12.5px;
+    box-sizing:border-box;
+}
+
+.side-panel input::placeholder{
+    color:rgba(255,255,255,.35);
+}
+
+.side-panel label{
+    flex-shrink:0;
+    display:block;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.45);
+    margin-bottom:4px;
+}
+
+.side-panel .panel-btn{
+    flex-shrink:0;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:9px;
+    border-radius:10px;
+    border:none;
+    background:var(--white);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.4px;
+    cursor:pointer;
+    margin-bottom:6px;
+    transition:transform .2s ease, filter .2s ease;
+    box-sizing:border-box;
+}
+
+.side-panel .panel-btn:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.15);
+}
+
+.side-panel .panel-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.side-panel .panel-btn.secondary{
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.14);
+}
+
+.side-panel .file-note{
+    padding:7px 10px;
+    border-radius:9px;
+    background:rgba(34,197,94,.1);
+    border:1px solid rgba(34,197,94,.3);
+    color:#a7f3d0;
+    font-size:11.5px;
+    margin-bottom:4px;
+}
+
+/* ---------- Inline error under the generate button ---------- */
+
+.qa-error{
+    flex-shrink:0;
+    padding:10px 12px;
+    border-radius:10px;
+    background:rgba(211,54,54,.12);
+    border:1px solid rgba(211,54,54,.35);
+    color:#ffb4b4;
+    font-size:12.5px;
+    margin-bottom:12px;
+}
+
+/* ---------- Spinner shown inside "Generating…" button ---------- */
+
+.btn-spinner{
+    display:inline-block;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    border:2px solid rgba(0,0,0,.25);
+    border-top-color:var(--ink);
+    animation:qa-spin .7s linear infinite;
+    margin-right:8px;
+    vertical-align:middle;
+}
+
+@keyframes qa-spin{
+    to{ transform:rotate(360deg); }
+}
+
+/* ---------- Scroll area holding the sticky tabs + question list ----------
+   Tabs and list share ONE scrolling ancestor so `position: sticky` on
+   .qa-tabs actually sticks to the top instead of scrolling away.
+------------------------------------------------------------------------- */
+
+.qa-scroll-area{
+    flex:1;
+    min-height:0;
+
+    display:flex;
+    flex-direction:column;
+
+    overflow-y:auto;
+    overflow-x:hidden;
+
+    margin-top:8px;
+    padding-top:10px;
+
+    border-top:1px solid var(--border-soft);
+}
+
+.qa-scroll-area::-webkit-scrollbar{
+    width:7px;
+}
+
+.qa-scroll-area::-webkit-scrollbar-thumb{
+    background:#555;
+    border-radius:20px;
+}
+
+/* ---------- Category tabs ----------
+   NOTE: these overrides are intentionally high-specificity
+   (.qa-tabs button.qa-tab) because a global `button { width:100% }`
+   style elsewhere in the app was stretching each tab into a full-width
+   stacked bar instead of a small horizontal pill. Do not remove the
+   `width:auto !important` below or that regression comes back.
+------------------------------------------------------------------- */
+
+.qa-tabs{
+    flex-shrink:0;
+
+    position:sticky;
+    top:0;
+    z-index:5;
+
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:8px;
+
+    background:rgba(20,20,20,.95);
+    backdrop-filter:blur(6px);
+
+    padding-bottom:12px;
+    margin-bottom:4px;
+}
+
+.qa-tabs button.qa-tab{
+    display:inline-flex;
+    flex:0 0 auto;
+    width:auto !important;
+    max-width:none;
+
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+
+    padding:7px 12px;
+    margin:0;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.05);
+    color:rgba(255,255,255,.65);
+    font-family:var(--font-body);
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.3px;
+    line-height:1.2;
+    cursor:pointer;
+    white-space:nowrap;
+    box-sizing:content-box;
+    transition:background .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+.qa-tabs button.qa-tab:hover{
+    background:rgba(255,255,255,.1);
+    color:#fff;
+}
+
+.qa-tabs button.qa-tab.is-active{
+    background:var(--tab-color, #4C6FFF);
+    border-color:transparent;
+    color:#fff;
+    box-shadow:0 6px 16px rgba(0,0,0,.35);
+}
+
+.qa-tab-count{
+    background:rgba(255,255,255,.18);
+    border-radius:999px;
+    padding:1px 7px;
+    font-size:10.5px;
+    font-weight:700;
+    line-height:1.5;
+}
+
+.qa-tab.is-active .qa-tab-count{
+    background:rgba(255,255,255,.28);
+}
+
+/* ---------- Question / answer list ---------- */
+
+.qa-list{
+    display:flex;
+    flex-direction:column;
+}
+
+.qa-item{
+    border:1px solid var(--border-soft);
+    border-radius:12px;
+    margin-bottom:10px;
+    background:rgba(255,255,255,.02);
+    overflow:hidden;
+    transition:border-color .2s ease, background .2s ease;
+}
+
+.qa-item:last-child{
+    margin-bottom:0;
+}
+
+.qa-item.is-open{
+    border-color:var(--qa-color, rgba(255,255,255,.3));
+    background:rgba(255,255,255,.04);
+}
+
+.qa-question{
+    width:100%;
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:12px 14px;
+    background:transparent;
+    border:none;
+    cursor:pointer;
+    text-align:left;
+    font-family:var(--font-body);
+    color:#fff;
+    box-sizing:border-box;
+}
+
+.qa-question:hover{
+    background:rgba(255,255,255,.03);
+}
+
+.qa-index{
+    flex-shrink:0;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.3px;
+    color:var(--qa-color, #4C6FFF);
+    background:rgba(255,255,255,.08);
+    border-radius:6px;
+    padding:3px 7px;
+    margin-top:1px;
+}
+
+.qa-question-text{
+    flex:1;
+    font-size:13.5px;
+    font-weight:500;
+    line-height:1.5;
+    color:#fff;
+}
+
+.qa-chevron{
+    flex-shrink:0;
+    font-size:16px;
+    font-weight:600;
+    line-height:1;
+    color:rgba(255,255,255,.5);
+    width:20px;
+    height:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.qa-answer{
+    margin:0;
+    padding:0 14px 14px 46px;
+    font-size:13px;
+    line-height:1.65;
+    color:rgba(255,255,255,.7);
+}
+
+.qa-answer-code{
+    margin:0 14px 14px 14px;
+    padding:12px 14px;
+    border-radius:10px;
+    background:rgba(0,0,0,.4);
+    border:1px solid rgba(255,255,255,.08);
+    overflow-x:auto;
+    white-space:pre-wrap;
+    word-break:break-word;
+    font-family:"Fira Code","SFMono-Regular",Consolas,monospace;
+    font-size:12.5px;
+    line-height:1.6;
+    color:#c9f2c9;
+}
+
+.qa-empty{
+    padding:24px 10px;
+    text-align:center;
+    color:rgba(255,255,255,.4);
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* ---------- Mobile (interview room) ---------- */
+
+@media (max-width:600px){
+    .thumb-tile,
+    .thumb-placeholder{
+        width:150px;
+        height:100px;
+    }
+
+    .qa-tabs{
+        gap:6px;
+    }
+
+    .qa-tabs button.qa-tab{
+        padding:6px 10px;
+        font-size:11px;
+    }
+}
+
+
+
+
+
