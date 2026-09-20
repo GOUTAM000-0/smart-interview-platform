@@ -1,67 +1,103 @@
 # Smart Interview System — Frontend
 
-A modern React-based frontend for the **Smart Interview System**, an AI-powered technical interview platform designed to support structured interviews between candidates and interviewers.
+The frontend application for the **Smart Interview System**, an AI-powered platform for conducting structured technical interviews between candidates and interviewers.
 
-The frontend provides dedicated experiences for **Candidates** and **Interviewers**, including authentication, interview management, AI-powered question generation, real-time interview communication, and protected role-based dashboards.
+Built with **React and Vite**, the frontend provides authentication, dashboards, interview rooms, AI question generation, real-time communication, and role-based user experiences.
 
 ---
 
-## Overview
+## Features
 
-The Smart Interview System frontend communicates with a Spring Boot backend through REST APIs and real-time WebSocket connections.
+### Authentication
 
-It provides:
-
-- Candidate authentication and registration
-- Interviewer authentication and registration
-- OTP-based verification flows
-- Role-based access control
-- Candidate dashboard
-- Interviewer dashboard
-- AI-powered interview question generation
-- Technical interview rooms
-- Real-time interview communication
-- WebRTC-based interview communication
-- WebSocket/STOMP integration
+- Candidate registration
+- Interviewer registration
+- Login
+- OTP verification
+- Forgot password
+- Password reset
 - Protected routes
-- Password reset and recovery flows
-- Responsive user interface
+- Role-based access
+
+### Candidate
+
+- Candidate dashboard
+- Interview invitations
+- Interview acceptance
+- Online interview room
+- Real-time interview interaction
+
+### Interviewer
+
+- Interviewer dashboard
+- Start interviews
+- Conduct interviews
+- Candidate management
+- AI-powered question generation
+- Online interview room
+
+### Real-Time Features
+
+- WebSocket / STOMP communication
+- Real-time interview updates
+- WebRTC communication
+- Interview room synchronization
 
 ---
 
-## Technology Stack
+# Technology Stack
 
-| Category | Technology |
+| Technology | Purpose |
 |---|---|
-| Framework | React |
-| Build Tool | Vite |
-| Language | JavaScript (ES6+) |
-| Routing | React Router |
-| HTTP Client | Axios |
-| Real-Time Communication | WebSocket / STOMP |
-| Video Communication | WebRTC |
-| Authentication | JWT |
-| Styling | CSS3 |
-| Code Quality | ESLint |
-| Backend Integration | Spring Boot REST API |
+| React | Frontend framework |
+| Vite | Development and build tool |
+| JavaScript | Programming language |
+| React Router | Application routing |
+| Axios | REST API communication |
+| WebSocket / STOMP | Real-time communication |
+| WebRTC | Video/audio communication |
+| CSS3 | Styling |
+| ESLint | Code quality |
 
 ---
 
-## Frontend Architecture
+# Frontend Architecture
 
+```text
+                    Smart Interview System
+                             │
+              ┌──────────────┴──────────────┐
+              │                             │
+          Candidate                     Interviewer
+              │                             │
+              ▼                             ▼
+          Login/Register               Login/Register
+              │                             │
+              ▼                             ▼
+          Dashboard                    Dashboard
+              │                             │
+              │                       Create Interview
+              │                             │
+              └──────────────┬──────────────┘
+                             │
+                      Interview Room
+                             │
+                    ┌────────┴────────┐
+                    │                 │
+                WebSocket           WebRTC
+                    │                 │
+                    └────────┬────────┘
+                             │
+                      Live Interview
+```
+```text
 frontend/
 │
 ├── public/
-│   ├── _redirects
-│   ├── favicon.svg
-│   └── icons.svg
 │
 ├── src/
 │   │
 │   ├── assets/
-│   │   ├── hero.png
-│   │   ├── react.svg
-│   │   └── vite.svg
 │   │
 │   ├── components/
 │   │   ├── AlertMessage.jsx
@@ -84,21 +120,12 @@ frontend/
 │   │   ├── CandidateDashboard.jsx
 │   │   ├── CandidateInterviewRoom.jsx
 │   │   ├── ConductInterview.jsx
-│   │   ├── ForgotPassword.jsx
 │   │   ├── InterviewerDashboard.jsx
-│   │   ├── InterviewerForgotPassword.jsx
 │   │   ├── InterviewerInterviewRoom.jsx
 │   │   ├── InterviewerRegister.jsx
-│   │   ├── InterviewerResetPassword.jsx
-│   │   ├── InterviewerVerifyOtp.jsx
-│   │   ├── InterviewerVerifyRegistration.jsx
 │   │   ├── Login.jsx
-│   │   ├── NotFound.jsx
 │   │   ├── Register.jsx
-│   │   ├── ResetPassword.jsx
-│   │   ├── Unauthorized.jsx
-│   │   ├── VerifyOtp.jsx
-│   │   └── VerifyRegistration.jsx
+│   │   └── ...
 │   │
 │   ├── services/
 │   │   ├── aiService.js
@@ -121,11 +148,39 @@ frontend/
 ├── package-lock.json
 ├── vite.config.js
 └── eslint.config.js
+```
 
-                 Smart Interview System
+### Authentication
+Authentication state is managed using React Context.
+
+```text
+                    AuthContext
                          │
-                ┌────────┴────────┐
-                │                 │
-            Candidate         Interviewer
-                │                 │
-          Candidate UI      Interviewer UI
+          ┌──────────────┼──────────────┐
+          │              │              │
+        Login          Logout        User State
+          │                             │
+          └──────────────┬──────────────┘
+                         │
+                  Protected Routes
+```
+
+### AI Question Generator
+```text
+Interviewer
+     │
+     ▼
+AI Question Generator
+     │
+     ▼
+Frontend Service
+     │
+     ▼
+Spring Boot Backend
+     │
+     ▼
+Groq AI
+     │
+     ▼
+Generated Questions
+```
