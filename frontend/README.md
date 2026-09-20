@@ -1,16 +1,131 @@
-# React + Vite
+# Smart Interview System — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React-based frontend for the **Smart Interview System**, an AI-powered technical interview platform designed to support structured interviews between candidates and interviewers.
 
-Currently, two official plugins are available:
+The frontend provides dedicated experiences for **Candidates** and **Interviewers**, including authentication, interview management, AI-powered question generation, real-time interview communication, and protected role-based dashboards.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The Smart Interview System frontend communicates with a Spring Boot backend through REST APIs and real-time WebSocket connections.
 
-## Expanding the ESLint configuration
+It provides:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Candidate authentication and registration
+- Interviewer authentication and registration
+- OTP-based verification flows
+- Role-based access control
+- Candidate dashboard
+- Interviewer dashboard
+- AI-powered interview question generation
+- Technical interview rooms
+- Real-time interview communication
+- WebRTC-based interview communication
+- WebSocket/STOMP integration
+- Protected routes
+- Password reset and recovery flows
+- Responsive user interface
+
+---
+
+## Technology Stack
+
+| Category | Technology |
+|---|---|
+| Framework | React |
+| Build Tool | Vite |
+| Language | JavaScript (ES6+) |
+| Routing | React Router |
+| HTTP Client | Axios |
+| Real-Time Communication | WebSocket / STOMP |
+| Video Communication | WebRTC |
+| Authentication | JWT |
+| Styling | CSS3 |
+| Code Quality | ESLint |
+| Backend Integration | Spring Boot REST API |
+
+---
+
+## Frontend Architecture
+
+frontend/
+│
+├── public/
+│   ├── _redirects
+│   ├── favicon.svg
+│   └── icons.svg
+│
+├── src/
+│   │
+│   ├── assets/
+│   │   ├── hero.png
+│   │   ├── react.svg
+│   │   └── vite.svg
+│   │
+│   ├── components/
+│   │   ├── AlertMessage.jsx
+│   │   ├── AuthBackground.jsx
+│   │   ├── AuthLayout.jsx
+│   │   ├── LoadingSpinner.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── NotificationBell.jsx
+│   │   ├── ProtectedRoute.jsx
+│   │   └── RoleSelectionModal.jsx
+│   │
+│   ├── context/
+│   │   └── AuthContext.jsx
+│   │
+│   ├── hooks/
+│   │   └── useAuth.js
+│   │
+│   ├── pages/
+│   │   ├── AIQuestionGenerator.jsx
+│   │   ├── CandidateDashboard.jsx
+│   │   ├── CandidateInterviewRoom.jsx
+│   │   ├── ConductInterview.jsx
+│   │   ├── ForgotPassword.jsx
+│   │   ├── InterviewerDashboard.jsx
+│   │   ├── InterviewerForgotPassword.jsx
+│   │   ├── InterviewerInterviewRoom.jsx
+│   │   ├── InterviewerRegister.jsx
+│   │   ├── InterviewerResetPassword.jsx
+│   │   ├── InterviewerVerifyOtp.jsx
+│   │   ├── InterviewerVerifyRegistration.jsx
+│   │   ├── Login.jsx
+│   │   ├── NotFound.jsx
+│   │   ├── Register.jsx
+│   │   ├── ResetPassword.jsx
+│   │   ├── Unauthorized.jsx
+│   │   ├── VerifyOtp.jsx
+│   │   └── VerifyRegistration.jsx
+│   │
+│   ├── services/
+│   │   ├── aiService.js
+│   │   ├── api.js
+│   │   ├── authService.js
+│   │   ├── interviewService.js
+│   │   ├── webrtcService.js
+│   │   └── websocketService.js
+│   │
+│   ├── utils/
+│   │   └── auth.js
+│   │
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   └── main.jsx
+│
+├── index.html
+├── package.json
+├── package-lock.json
+├── vite.config.js
+└── eslint.config.js
+
+                 Smart Interview System
+                         │
+                ┌────────┴────────┐
+                │                 │
+            Candidate         Interviewer
+                │                 │
+          Candidate UI      Interviewer UI
