@@ -51,6 +51,7 @@ Smart Interview System provides a centralized platform for conducting technical 
                                   │
                            Interview Session
 ```
+```text
 SmartInterviewSystem/
 │
 ├── backend/
@@ -67,3 +68,4 @@ SmartInterviewSystem/
 │
 ├── .gitignore
 └── README.md
+```
