@@ -50,3 +50,20 @@ Smart Interview System provides a centralized platform for conducting technical 
                  └──────────── REST API / WebSocket ────────────┘
                                   │
                            Interview Session
+```
+SmartInterviewSystem/
+│
+├── backend/
+│   ├── src/
+│   ├── pom.xml
+│   ├── Dockerfile
+│   └── README.md
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   └── README.md
+│
+├── .gitignore
+└── README.md
